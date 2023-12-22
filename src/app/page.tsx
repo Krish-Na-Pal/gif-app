@@ -1,16 +1,11 @@
-// pages/page.tsx
-import React from 'react';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Image from 'next/image'
+import Dashboard from './components/Dashboard'
 
-const Home: React.FC = () => {
+
+export default function Home() {
   return (
-    <div>
-      <h1>Welcome to My Next.js App</h1>
-      <Signup />
-      {/* <Login /> */}
-    </div>
-  );
-};
-
-export default Home;
+    <main>
+      <Dashboard />
+    </main>
+  )
+}
