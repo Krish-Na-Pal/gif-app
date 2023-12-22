@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@giphy/js-fetch-api": "^5.2.0",
+    "@giphy/react-components": "^9.2.3",
     "axios": "^1.6.2",
     "firebase": "^10.7.1",
     "next": "14.0.4",
