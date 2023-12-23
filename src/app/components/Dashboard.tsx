@@ -137,7 +137,7 @@ const Dashboard: React.FC = () => {
         <div>
         </div>
       </div>
-        <div className="sm:grid md:flex md:flex-wrap md:p-10 w-full items-center h-fit justify-center pb-20">
+        <div className="sm:grid md:justify-between md:flex md:flex-wrap md:p-10 w-full items-center h-fit justify-center pb-20">
           {renderGifs()}
         </div>
           <Paginate
