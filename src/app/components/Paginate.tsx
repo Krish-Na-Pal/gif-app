@@ -14,14 +14,30 @@ const Paginate: React.FC<Props> = ({ pageSelected,currentPage, itemsPerPage, tot
         pageNumbers.push(i);
     }
 
-  return <nav>
+  return <nav className=" bottom-16 fixed">
     <ul className="flex text-black gap-2">
         <li>
-            <div className="flex pr-2 pl-2 bg-slate-300 h-10 w-auto text-center items-center align-middle font-mono font-bold">
-                Previous
+            <div className="flex pr-2 pl-2 bg-slate-200 h-12 w-auto text-center items-center align-middle font-mono font-bold">
+                    <a 
+                        onClick={() => {
+                            if(currentPage > 1){
+                            pageSelected(currentPage - 1)
+                            }
+                        }}
+                        href="#" 
+                        className="page-link"
+                    >
+                        Previous
+                    </a>
             </div>
         </li>
         {pageNumbers.map(number => {
+
+            let classes = "flex bg-slate-200 h-12 w-10 items-center justify-center font-mono font-bold";
+            if( number === currentPage){
+                classes = "flex border-b-4 border-pink-500 h-12 w-10 bg-pink-200 items-center justify-center font-mono font-bold";
+            }
+
             return(
                 <li key={number}>
                     <a 
@@ -29,7 +45,7 @@ const Paginate: React.FC<Props> = ({ pageSelected,currentPage, itemsPerPage, tot
                         href="#" 
                         className="page-link"
                     >
-                        <div className="flex bg-slate-300 h-10 w-10 items-center justify-center font-mono font-bold">
+                        <div className={classes}>
                             {number}
                         </div>
                     </a>    
@@ -37,8 +53,18 @@ const Paginate: React.FC<Props> = ({ pageSelected,currentPage, itemsPerPage, tot
             )}
         )}
         <li>
-            <div className="flex pr-2 px-2 bg-slate-300 h-10 w-auto text-center items-center align-middle font-mono font-bold">
-                Next
+            <div className="flex pr-2 px-2 bg-slate-200 h-12 w-auto text-center items-center align-middle font-mono font-bold ">
+                    <a 
+                        onClick={() => {
+                            if(pageNumbers.length < currentPage){
+                                pageSelected(currentPage + 1)
+                            }
+                        }}
+                        href="#" 
+                        className="page-link"
+                    >
+                        Next
+                    </a>
             </div>
         </li>
     </ul>

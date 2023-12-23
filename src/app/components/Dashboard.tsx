@@ -1,11 +1,28 @@
 "use client"; // This is a client component 👈🏽
 
 // components/Dashboard.tsx
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import Giphy from "@/utils/giphy";
 import axios from "axios";
 import { Loader } from "@giphy/react-components";
 import Paginate from "./Paginate";
+
+interface Gif {
+  id: string,
+  title: string,
+  username: string,
+  gif : string,
+  isFavorite: boolean
+}
+
+interface FavoritesProps {
+  favorites: Gif[];
+}
+
+interface HomeProps {
+  gifs: Gif[];
+  onToggleFavorite: (gif: Gif) => void;
+}
 
 
 const GIPHY_API_KEY = 'GlVGYHkr3WSBnllca54iNt0yFbjz7L65';
@@ -19,10 +36,27 @@ const Dashboard: React.FC = () => {
   const[itemsPerPage, setIemsPerPage] = useState(5);
   const indexOfLastItem = currentPage*itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  let currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handleSearchChange = (event: any) => {
+  
+  // const [favorites, setFavorites] = useState<Gif[]>([]);
+
+  const [favorite, setFavorite] = useState(false);
+
+  const handleSearchChange = async (event: any) => {
     setSearch(event.target.value);
+    setIsLoading(true)
+      event.preventDefault();
+      const results = await axios(GIPHY_API_URL,{
+        params: {
+          api_key:  GIPHY_API_KEY,
+          q: search,
+          limit: 20,
+        }
+      })
+      console.log(results);
+      setData(results.data.data);
+      setIsLoading(false);
   };
 
   const handleSubmit = async (event: any) => {
@@ -42,16 +76,25 @@ const Dashboard: React.FC = () => {
   }
 
   const renderGifs = () => {
-    
     if(isLoading){
-      return <Loader />
+      return <Loader className=" pt-32" />
     }
     return currentItems.map((el: any) => {
-      return <div key={el.id} className='gif'>
+
+      return <div key={el.id} className='gif flex flex-col size-2/12'>
               <img 
                 src={el.images.fixed_height.url} 
-                className='rounded-md'
+                className='rounded-xl'
               />
+              <div className="flex items-start gap-4 pt-4 justify-between">
+                <div>
+                  <p className=" text-slate-700 text-xl font-bold">{el.title}</p>
+                  <p className=" text-slate-500">@{el.username}</p>
+                </div>
+                <div className="grid size-12 justify-end">
+                  <button ><img src="/star.svg" alt="B" className=" w-6 h-6"/></button>
+                </div>
+              </div>
             </div>
     })
   }
@@ -76,17 +119,18 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="flex rounded-lg p-0 bg-stone-900 items-center h-auto">
             <button 
-              className=" bg-stone-900 pl-4 pr-4 rounded-lg h-full w-full"
+              className=" bg-stone-900 pl-4 pr-4 rounded-lg h-full w-full font-bold"
               onClick={handleSubmit}
             >
               Search
             </button>
+            
           </div>
         </form>
         <div>
         </div>
       </div>
-        <div className="flex flex-wrap gap-3 justify-center">
+        <div className="flex flex-wrap gap-3 w-full items-center h-fit justify-center">
           {renderGifs()}
         </div>
         <Paginate
