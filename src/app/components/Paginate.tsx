@@ -14,7 +14,7 @@ const Paginate: React.FC<Props> = ({ pageSelected,currentPage, itemsPerPage, tot
         pageNumbers.push(i);
     }
 
-  return <nav className=" bottom-16 fixed">
+  return <nav className=" bottom-5 sticky">
     <ul className="flex text-black gap-2">
         <li>
             <div className="flex pr-2 pl-2 bg-slate-200 h-12 w-auto text-center items-center align-middle font-mono font-bold">
@@ -56,7 +56,7 @@ const Paginate: React.FC<Props> = ({ pageSelected,currentPage, itemsPerPage, tot
             <div className="flex pr-2 px-2 bg-slate-200 h-12 w-auto text-center items-center align-middle font-mono font-bold ">
                     <a 
                         onClick={() => {
-                            if(pageNumbers.length < currentPage){
+                            if(pageNumbers.length > currentPage){
                                 pageSelected(currentPage + 1)
                             }
                         }}
