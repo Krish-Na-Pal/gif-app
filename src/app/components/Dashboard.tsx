@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
           params: {
             api_key: GIPHY_API_KEY,
             q: search,
-            limit: 25,
+            limit: 20,
           }
         })
         setData(results.data.data);
