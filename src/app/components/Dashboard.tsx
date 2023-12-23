@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
 
   const renderGifs = () => {
     if(isLoading){
-      return <div className="mt-32 md:ml-72"><Loader /></div>
+      return <div className="mt-32 md:ml-96"><Loader /></div>
     }
     return currentItems.map((el: any) => {
 
