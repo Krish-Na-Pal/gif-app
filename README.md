@@ -1,4 +1,5 @@
-**Live On:**https://gif-app-kohl.vercel.app/
+## Live On: 
+  https://gif-app-kohl.vercel.app/
 ## Getting Started
 
 First, run the development server:
