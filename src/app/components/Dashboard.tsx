@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const[currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
   const indexOfLastItem = currentPage*itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   let currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
