@@ -50,7 +50,7 @@ const Login: React.FC = () => {
           Login
         </button>
       </form>
-      <p className='bold text-sm m-3 font-mono'>Don't have account? <Link href='/signup' className='text-md font-bold underline'>SignUp</Link></p>
+      <p className='bold text-sm m-3 font-mono'>Don&apos;t have account? <Link href='/signup' className='text-md font-bold underline'>SignUp</Link></p>
     </div>
   );
 };

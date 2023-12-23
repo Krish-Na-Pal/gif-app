@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) return router.push('/login');
+    if (user == null) return router.push('/login');
   }, [user]);
 
   const handleSearchChange = async (event: any) => {
